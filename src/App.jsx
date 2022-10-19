@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { config } from 'dotenv';
-import { Matches } from './components';
+// import { Matches } from './components';
 import axios from './utils/axios';
 
 config();
@@ -30,7 +30,8 @@ function App() {
 
   return (
     <div className="App">
-      <Matches />
+      <h1>App</h1>
+      {/* <Matches /> */}
     </div>
   );
 }
