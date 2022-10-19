@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
+import moment from 'moment';
 import './style.css';
 
 const CompetitonStats = () => {
-  let CompetitionId = 6;
+  const [currentSeasonDetails, setCurrentSeasonDetails] = useState({});
+  let CompetitionId = 3;
   const [competitionTable, setCompetitionTable] = useState([]);
 
   useEffect(() => {
@@ -12,8 +14,22 @@ const CompetitonStats = () => {
       const {
         data: { data },
       } = await axios.get(`/competitions?id=${competitionId}`);
-      console.log(data[0].seasons[0].id);
-      return data[0].seasons[0].id;
+
+      const startDate = data[0].currentSeason.start_date;
+      const endDate = data[0].currentSeason.end_date;
+      const currentProgressPercentage =
+        (moment().diff(startDate, 'days') /
+          moment(endDate).diff(startDate, 'days')) *
+        100;
+      setCurrentSeasonDetails({
+        id: data[0].currentSeason.id,
+        name: data[0].currentSeason.name,
+        startDate: data[0].currentSeason.start_date,
+        endDate: data[0].currentSeason.end_date,
+        currentProgressPercentage,
+      });
+
+      return data[0].currentSeason.id;
     };
     const getCompetitonCurrentSeasonTable = async (competitionId) => {
       const seasonId = await getCompetitonCurrentSeason(competitionId);
@@ -41,82 +57,110 @@ const CompetitonStats = () => {
     getCompetitonCurrentSeasonTable(CompetitionId);
   }, []);
   return (
-    <div>
-      <h1>Competition Stats</h1>
-      {!competitionTable.length ? (
-        <CircularProgress />
-      ) : (
-        <div>
-          <table className="competition-table">
-            <tr>
-              <th>#</th>
-              <th
-                style={{
-                  textAlign: 'right',
-                  color: '#DF6276',
-                  width: '20rem',
-                }}
-              >
-                الفريق
-              </th>
-              <th>لعب</th>
-              <th>فاز</th>
-              <th>خسر</th>
-              <th>تعادل</th>
-              <th>له</th>
-              <th>عليه</th>
-              <th
-                style={{
-                  textAlign: 'right',
-                  color: '#DF6276',
-                }}
-              >
-                نقاط
-              </th>
-            </tr>
+    <div class="comeptiton-page-container">
+      <div class="competition-title-container">
+        <div class="competition-img">
+          <h3 class="comeptition-name">{currentSeasonDetails.name}</h3>
+          <img
+            src={`https://cdn.so3ody.com/scores/competitions/100x130/${CompetitionId}.png`}
+            alt="competition-img"
+          ></img>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div
+              class="progress-bar-inner"
+              style={{
+                width: `${
+                  (currentSeasonDetails.currentProgressPercentage * 30) / 100
+                }rem`,
+              }}
+            ></div>
+          </div>
+          <div class="competetion-start-end-dates">
+            <p>{currentSeasonDetails.startDate}</p>
+            <p>{currentSeasonDetails.endDate}</p>
+          </div>
+        </div>
+      </div>
+      <section>
+        <h2>ترتيب الفرق</h2>
 
-            {competitionTable.map((team) => (
-              <tr class="competition-table-row" key={team.id}>
-                <td
+        {!competitionTable.length ? (
+          <CircularProgress />
+        ) : (
+          <div class="competition-table-container">
+            <table className="competition-table">
+              <tr>
+                <th>#</th>
+                <th
                   style={{
-                    padding: '0.1px',
+                    textAlign: 'right',
+                    color: '#DF6276',
+                    width: '20rem',
                   }}
                 >
-                  {team.position}
-                </td>
-                <td
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    gap: '10px',
-                  }}
-                >
-                  <img
-                    src={`https://cdn.so3ody.com/scores/teams/50x50/${team.id}.png`}
-                    alt="صورة الفريق"
-                  />
-                  <p>{team.name}</p>
-                </td>
-                <td>{team.totalMatches}</td>
-                <td>{team.totalWonMatches}</td>
-                <td>{team.totalLossMatches}</td>
-                <td>{team.totalDrawMatches}</td>
-                <td>{team.score}</td>
-                <td>{team.receive}</td>
-                <td
+                  الفريق
+                </th>
+                <th>لعب</th>
+                <th>فاز</th>
+                <th>خسر</th>
+                <th>تعادل</th>
+                <th>له</th>
+                <th>عليه</th>
+                <th
                   style={{
                     textAlign: 'right',
                     color: '#DF6276',
                   }}
                 >
-                  {team.points}
-                </td>
+                  نقاط
+                </th>
               </tr>
-            ))}
-          </table>
-        </div>
-      )}
+
+              {competitionTable.map((team) => (
+                <tr class="competition-table-row" key={team.id}>
+                  <td
+                    style={{
+                      padding: '0.1px',
+                    }}
+                  >
+                    {team.position}
+                  </td>
+                  <td
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      alignItems: 'center',
+                      gap: '10px',
+                    }}
+                  >
+                    <img
+                      src={`https://cdn.so3ody.com/scores/teams/50x50/${team.id}.png`}
+                      alt="صورة الفريق"
+                    />
+                    <p>{team.name}</p>
+                  </td>
+                  <td>{team.totalMatches}</td>
+                  <td>{team.totalWonMatches}</td>
+                  <td>{team.totalLossMatches}</td>
+                  <td>{team.totalDrawMatches}</td>
+                  <td>{team.score}</td>
+                  <td>{team.receive}</td>
+                  <td
+                    style={{
+                      textAlign: 'right',
+                      color: '#DF6276',
+                    }}
+                  >
+                    {team.points}
+                  </td>
+                </tr>
+              ))}
+            </table>
+          </div>
+        )}
+      </section>
     </div>
   );
 };
