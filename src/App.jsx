@@ -1,25 +1,23 @@
-import { useState, useEffect, createContext } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import { config } from 'dotenv';
+import { Matches } from './components';
+import axios from './utils/axios';
 
 config();
-export const AuthContext = createContext('');
 
-function AuthProvider({ children }) {
-  const [accessToken, setAccessToken] = useState('');
-
+function App() {
   const generateToken = async () => {
     const {
       data: {
         data: { access_token },
       },
-    } = await axios.post(`${process.env.REACT_APP_BASE_URL}/oauth/token`, {
+    } = await axios.post('/oauth/token', {
       client_id: process.env.REACT_APP_CLIENT_ID,
       client_secret: process.env.REACT_APP_CLIENT_SECRET,
       grant_type: process.env.REACT_APP_GRANT_TYPE,
     });
 
-    setAccessToken(access_token);
+    localStorage.setItem('token', access_token);
   };
 
   useEffect(() => {
@@ -31,8 +29,10 @@ function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={accessToken}>{children}</AuthContext.Provider>
+    <div className="App">
+      <Matches />
+    </div>
   );
 }
 
-export default AuthProvider;
+export default App;
