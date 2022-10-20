@@ -1,15 +1,30 @@
 import './style.css';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
-// import images
-import Sport24Logo from '../../title-cover.png';
+import Sport24Logo from '../../assets/sport-24-logo.png';
+import new24Logo from '../../assets/news-24-logo.png';
+import sortIcon from '../../assets/sort-icon.png';
 
 const Header = () => {
   return (
     <header className="header">
       <div className="header-logo">
+        <img src={sortIcon} alt="sort-icon" class="bar-icon" />
         <img src={Sport24Logo} alt="sport24 logo" />
-        <img src={Sport24Logo} alt="news24 logo" />
+
+        <PersonOutlineIcon
+          sx={{
+            display: {
+              xl: 'none',
+              lg: 'none',
+              md: 'none',
+              sm: 'block',
+              xs: 'block',
+            },
+            fontSize: '2rem',
+          }}
+        />
+        <img src={new24Logo} alt="news24 logo" class="news-logo" />
       </div>
       <div className="header-nav">
         <div className class="links-list">
