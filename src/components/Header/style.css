@@ -1,0 +1,37 @@
+.header {
+  width: 100vw;
+}
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+}
+.links-list ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+.links-list ul li a {
+  color: black;
+  text-decoration: none;
+  font-weight: 200;
+  cursor: pointer;
+}
+.links-list ul li a:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+.links-list ul li {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.links-list ul li span {
+  color: #cfcfcf;
+}
+.header-user-info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}

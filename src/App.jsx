@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { config } from 'dotenv';
 // import { Matches } from './components';
 import axios from './utils/axios';
+import { Header } from './components';
 
 config();
 
@@ -28,12 +29,7 @@ function App() {
     }
   }, []);
 
-  return (
-    <div className="App">
-      <h1>App</h1>
-      {/* <Matches /> */}
-    </div>
-  );
+  return <Header></Header>;
 }
 
 export default App;
