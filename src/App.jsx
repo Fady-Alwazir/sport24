@@ -3,6 +3,8 @@ import { config } from 'dotenv';
 // import { Matches } from './components';
 import axios from './utils/axios';
 import { Header } from './components';
+import 'swiper/swiper.min.css';
+import 'swiper/swiper-bundle.min.css';
 
 config();
 
