@@ -1,7 +1,6 @@
 import React from 'react';
-import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { Card, CardActionArea } from '@mui/material';
 import styles from './pairs.module.css';
 
 function Pairs({ match }) {
