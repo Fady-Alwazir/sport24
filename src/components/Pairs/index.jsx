@@ -2,10 +2,12 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import { Card, CardActionArea } from '@mui/material';
 import styles from './pairs.module.css';
+import MyImg from '../../assets/gfs.jpg';
 
 function Pairs({ match, isCompetitionMatch = false }) {
   return (
     <Card className={styles.card}>
+      <img src={MyImg} alt="logo" />
       <CardActionArea>
         <div className={styles.cardHead}>
           <img
