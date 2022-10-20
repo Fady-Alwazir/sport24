@@ -21,7 +21,7 @@ function Pairs({ match }) {
               />
               <span>{match.teamA.name}</span>
             </div>
-            {match.status === 'played' ? (
+            {match.status === 'played' || match.status === 'playing' ? (
               <div className={styles.topCenter}>
                 <div className={styles.score}>
                   <Typography
