@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import { Card, CardActionArea } from '@mui/material';
 import styles from './pairs.module.css';
 
-function Pairs({ match }) {
+function Pairs({ match, isCompetitionMatch = false }) {
   return (
     <Card className={styles.card}>
       <CardActionArea>
@@ -23,6 +23,11 @@ function Pairs({ match }) {
             </div>
             {match.status === 'played' ? (
               <div className={styles.topCenter}>
+                {isCompetitionMatch && (
+                  <span className={styles.time}>
+                    {match.timing.split(' ')[0]}
+                  </span>
+                )}
                 <div className={styles.score}>
                   <Typography
                     variant="h5"
@@ -40,7 +45,41 @@ function Pairs({ match }) {
                     {match.scoreB}
                   </Typography>
                 </div>
-                <span className={styles.time}>وقت كامل</span>
+                {isCompetitionMatch ? (
+                  <span className={styles.time}>
+                    {match.timing.split(' ')[1].slice(0, 5)}
+                  </span>
+                ) : (
+                  <span className={styles.time}>وقت كامل</span>
+                )}
+              </div>
+            ) : match.status === 'playing' ? (
+              <div className={styles.topCenter}>
+                {isCompetitionMatch && (
+                  <span className={styles.time}>
+                    {match.timing.split(' ')[0]}
+                  </span>
+                )}
+                <div className={styles.score}>
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{ fontWeight: 'bold' }}
+                  >
+                    {match.scoreA}
+                  </Typography>
+                  <span>:</span>
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{ fontWeight: 'bold' }}
+                  >
+                    {match.scoreB}
+                  </Typography>
+                </div>
+                <span className={styles.time}>
+                  الشوط {match.active_half} دقيقة {match.minute}
+                </span>
               </div>
             ) : (
               <div className={styles.timing}>

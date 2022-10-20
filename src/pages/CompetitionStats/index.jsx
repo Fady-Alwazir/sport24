@@ -102,10 +102,12 @@ const CompetitonStats = () => {
       ) : (
         <CircularProgress />
       )}
+      <h2>مبارايات الأسبوع الحالي</h2>
+
       <div class="current-week-matches-container">
         {currentWeekMatches.length > 0 ? (
           currentWeekMatches.map((match) => {
-            return <Match match={match} />;
+            return <Match match={match} isCompetitionMatch />;
           })
         ) : (
           <CircularProgress />

@@ -80,3 +80,17 @@
   width: 100%;
   margin-top: 20px;
 }
+.current-week-matches-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+@media (max-width: 550px) {
+  .progress-bar-container {
+    width: 300px;
+  }
+}
