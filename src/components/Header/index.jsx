@@ -1,9 +1,16 @@
 import './style.css';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import SearchIcon from '@mui/icons-material/Search';
+// import images
+import Sport24Logo from '../../title-cover.png';
+
 const Header = () => {
   return (
     <header className="header">
-      <div className="header-logo"></div>
+      <div className="header-logo">
+        <img src={Sport24Logo} alt="sport24 logo" />
+        <img src={Sport24Logo} alt="news24 logo" />
+      </div>
       <div className="header-nav">
         <div className class="links-list">
           <ul>
@@ -32,7 +39,22 @@ const Header = () => {
         </div>
         <div className="header-user-info">
           <p>الدخول /التسجيل</p>
-          <PersonOutlineIcon />
+          <PersonOutlineIcon
+            sx={{
+              fontSize: '32px',
+            }}
+          />
+          <SearchIcon
+            sx={{
+              color: 'white',
+              background: 'blue',
+              fontSize: '32px',
+              borderRadius: '50%',
+              padding: '2px',
+              transform: 'scale(1.4)',
+              transform: 'rotate(90deg)',
+            }}
+          ></SearchIcon>
         </div>
       </div>
     </header>
