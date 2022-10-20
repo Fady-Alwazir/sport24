@@ -1,0 +1,73 @@
+.card {
+  width: min(100%, 600px);
+  margin-block: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.cardHead {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.cardHead > img {
+  width: 60px;
+}
+
+.cardHead > span {
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: block;
+  margin-right: 2rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0.5rem;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timing {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 100vh;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.3rem;
+}
+
+.topCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.score > * {
+  padding: 0 20px;
+}
+
+.score > span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
